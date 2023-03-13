@@ -13,7 +13,16 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 
 const Country = () => {
-    const [countries, setCountries] = useState([])
+  
+  interface Country {
+    flags: { png: string; alt: string};
+    name: {common: string};
+    region: string;
+    population: number;
+    languages?: { [key: string]: string };
+  }
+
+  const [countries, setCountries] = useState([])
 
   const fetchCountries = () => {
      axios
@@ -35,13 +44,13 @@ const Country = () => {
             <TableCell align="center">Name</TableCell>
             <TableCell align="center">Region</TableCell>
             <TableCell align="center">Population</TableCell>
-            <TableCell align="centre">Languages</TableCell>
+            <TableCell align="center">Languages</TableCell>
             <TableCell align="center"></TableCell>
             <TableCell align="center"></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-        {countries && countries.map((country, index)=> {
+        {countries && countries.map((country: Country, index: number)=> {
             return (
                 <TableRow
                     key={index}
@@ -55,7 +64,7 @@ const Country = () => {
                     <TableCell align="center">{country?.population}</TableCell>
                     <TableCell align="justify">
                         <ul>
-                            { country.languages && Object.values(country?.languages).map((lang)=><li key={lang}>{lang}</li>) }
+                            { country.languages && Object.values(country?.languages).map((lang: string)=><li key={lang}>{lang}</li>) }
                         </ul>
                     </TableCell>
                     <TableCell align="center">
