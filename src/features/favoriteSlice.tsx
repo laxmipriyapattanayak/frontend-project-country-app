@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 interface FavoriteState {
-    favorite: []
+  favoriteValue: []
 }
 
 const initialState: FavoriteState = {
-    favorite: [],
+    favoriteValue: [],
 }
 
 export const favoriteSlice = createSlice({
@@ -14,9 +14,9 @@ export const favoriteSlice = createSlice({
   reducers: {
     update: (state: any, action: {payload: {index: number}}) => {
         const {index} = action.payload
-        const trueOrFalse = state.favorite[index] ? false : true
+        const trueOrFalse = state.favoriteValue[index] ? false : true
         //add country details as well
-        state.favorite[index] = trueOrFalse
+        state.favoriteValue[index] = trueOrFalse
     },
   },
 })

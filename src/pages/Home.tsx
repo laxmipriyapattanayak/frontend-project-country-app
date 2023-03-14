@@ -1,13 +1,20 @@
 import React from 'react'
-//import Countries from '../components/Countries';
-import Countries2 from '../components/Countries2';
 
 const Home = () => {
   return (
     <div>
-     <Countries2/>
+    <h1>Country APP</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+        Soluta cupiditate blanditiis, aut qui labore exercitationem.
+        Sequi alias quis distinctio, magnam excepturi autem accusamus. 
+        Dolorum quaerat obcaecati enim, autem ipsam totam, 
+        facere accusantium repellat ipsa mollitia nisi voluptas.
+        Alias perferendis ducimus debitis dolores, atque omnis exercitationem
+        porro nemo ex dolorum. Enim omnis modi sapiente hic cum, odit odio 
+        neque tempora nostrum fuga aut? Aliquid laboriosam quis voluptatibus sed error, 
+        doloremque quo odio, blanditiis qui velit numquam aut cumque tempora veritatis? Qui.</p>
     </div>
   )
 }
 
-export default Home;
+export default Home

@@ -25,10 +25,10 @@ const Countries2 = () => {
     }
     
     const { countriesData } = useSelector((state:any)=>state.country);
-    const { favorite } = useSelector((state:any)=>state.favorite);
+    const { favoriteValue } = useSelector((state:any)=>state.favorite);
     const dispatch = useDispatch();
 
-    const handleFav: any = (index: number) => {
+    const handleFav = (index: number) => {
         dispatch(update({index: index}))
     }
 
@@ -72,7 +72,7 @@ const Countries2 = () => {
                                     <IconButton
                                         size="large"
                                         aria-label="change me"
-                                        color={favorite[index] ? "error" : "default"}
+                                        color={ favoriteValue[index] ? "error" : "default" }
                                         onClick={() => handleFav(index)}>
                                             <FavoriteIcon />
                                     </IconButton>

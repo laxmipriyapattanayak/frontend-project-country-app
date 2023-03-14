@@ -17,7 +17,7 @@ import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [darkMode,setDarkMode] = React.useState(false);
-  const { favorite } = useSelector((state:any)=>state.favorite);
+  const { favoriteValue } = useSelector((state:any)=>state.favorite);
   
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -39,8 +39,7 @@ const Header = () => {
 
           <MenuItem>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <HomeIcon />
-              <Link to="/"/>
+            <Link to="/home" className='header__Icon'><HomeIcon /></Link>
             </IconButton>
           </MenuItem>
           
@@ -49,7 +48,7 @@ const Header = () => {
               size="large"
               aria-label="change me"
               color="inherit">
-                <PublicIcon />
+                <Link to="/countries" className='header__Icon'> <PublicIcon /></Link>
             </IconButton>
           </MenuItem>
 
@@ -58,8 +57,9 @@ const Header = () => {
               size="large"
               aria-label="change me"
               color="inherit">
-              <Badge badgeContent={favorite.filter((f:boolean) => f && f === true).length} color="error">
-                <FavoriteIcon />
+              <Badge badgeContent={ favoriteValue.filter((f:boolean) => f && f === true).length } color="error">
+                <Link to="/favorite" className='header__Icon'><FavoriteIcon /></Link>
+                
               </Badge>
               
             </IconButton>
