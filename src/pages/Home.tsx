@@ -1,10 +1,11 @@
 import React from 'react'
-import Country from '../components/Country';
+//import Countries from '../components/Countries';
+import Countries2 from '../components/Countries2';
 
 const Home = () => {
   return (
     <div>
-     <Country/>
+     <Countries2/>
     </div>
   )
 }

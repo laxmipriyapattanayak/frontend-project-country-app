@@ -8,7 +8,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
-
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 
@@ -23,14 +22,12 @@ const Country = () => {
   }
 
   const [countries, setCountries] = useState([])
-
   const fetchCountries = () => {
      axios
         .get("https://restcountries.com/v3.1/all")
         .then((res) => setCountries(res.data))
         .catch((err) => console.log(err))
   }
-  
   useEffect(() => {
     fetchCountries()
   },[]);

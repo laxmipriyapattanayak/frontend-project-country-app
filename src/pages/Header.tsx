@@ -12,10 +12,13 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 import ToggleOnIcon from '@mui/icons-material/ToggleOn';
 import ToggleOffIcon from '@mui/icons-material/ToggleOff';
 import Badge from '@mui/material/Badge';
+import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [darkMode,setDarkMode] = React.useState(false);
-
+  const { favorite } = useSelector((state:any)=>state.favorite);
+  
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -37,6 +40,7 @@ const Header = () => {
           <MenuItem>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
               <HomeIcon />
+              <Link to="/"/>
             </IconButton>
           </MenuItem>
           
@@ -54,9 +58,10 @@ const Header = () => {
               size="large"
               aria-label="change me"
               color="inherit">
-              <Badge badgeContent={3} color="error">
+              <Badge badgeContent={favorite.filter((f:boolean) => f && f === true).length} color="error">
                 <FavoriteIcon />
               </Badge>
+              
             </IconButton>
           </MenuItem>
 
