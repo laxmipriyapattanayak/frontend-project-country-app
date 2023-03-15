@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchCountries } from '../features/countrySlice';
 import { update } from '../features/favoriteSlice'
 
 import Table from '@mui/material/Table';
@@ -15,7 +14,9 @@ import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 
-const Countries2 = () => {
+const Countries2 = (props: any) => {
+    const {countriesData} = props;
+
     interface Country {
         flags: { png: string; alt: string};
         name: {common: string};
@@ -24,17 +25,14 @@ const Countries2 = () => {
         languages?: { [key: string]: string };
     }
     
-    const { countriesData } = useSelector((state:any)=>state.country);
     const { favoriteValue } = useSelector((state:any)=>state.favorite);
     const dispatch = useDispatch();
 
-    const handleFav = (index: number) => {
-        dispatch(update({index: index}))
+    const handleFav = (index: number,country: Country) => {
+        dispatch(update({index: index,country: country}))
     }
 
-    useEffect(() => {
-        dispatch(fetchCountries());
-    },[dispatch]);
+   
 
     return (
         <TableContainer component={Paper}>
@@ -72,8 +70,8 @@ const Countries2 = () => {
                                     <IconButton
                                         size="large"
                                         aria-label="change me"
-                                        color={ favoriteValue[index] ? "error" : "default" }
-                                        onClick={() => handleFav(index)}>
+                                        color={ favoriteValue[index]?.fav ? "error" : "default" }
+                                        onClick={() => handleFav(index, country)}>
                                             <FavoriteIcon />
                                     </IconButton>
                                 </TableCell>

@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
+
 import Countries from './pages/Countries';
 import Footer from './pages/Footer';
 import NoPage from './pages/NoPage';
@@ -14,7 +15,7 @@ function App() {
       <Header />
         <main>
           <Routes>
-            <Route path='/home' element={<Home />}/>
+            <Route path='/' element={<Home />}/>
             <Route path='/favorite' element={<Favorite />}/>
             <Route path='/countries' element={<Countries />}/>
             <Route path='*' element={<NoPage />}/>

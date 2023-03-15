@@ -39,7 +39,7 @@ const Header = () => {
 
           <MenuItem>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-            <Link to="/home" className='header__Icon'><HomeIcon /></Link>
+            <Link to="/" className='header__Icon'><HomeIcon /></Link>
             </IconButton>
           </MenuItem>
           
@@ -57,7 +57,7 @@ const Header = () => {
               size="large"
               aria-label="change me"
               color="inherit">
-              <Badge badgeContent={ favoriteValue.filter((f:boolean) => f && f === true).length } color="error">
+              <Badge badgeContent={ favoriteValue.filter((f:any) => f.fav === true).length } color="error">
                 <Link to="/favorite" className='header__Icon'><FavoriteIcon /></Link>
                 
               </Badge>
