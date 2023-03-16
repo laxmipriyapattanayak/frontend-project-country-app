@@ -2,7 +2,7 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <p>country app @2023 all right received</p>
+    <footer>country app @2023 all right received</footer>
   )
 }
 

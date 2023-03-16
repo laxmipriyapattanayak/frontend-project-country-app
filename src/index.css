@@ -21,3 +21,8 @@ img {
 .header__Icon{
   color:white;
 }
+footer { 
+  color: gray;
+  font-size: smaller;
+  margin-top: 20%;
+}

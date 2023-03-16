@@ -1,13 +1,13 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
-import Countries2 from '../components/Countries2';
+import Countries from '../components/Countries';
 
 const Favorite = () => {
-  const { favoriteValue } = useSelector((state:any)=>state.favorite);
-  const countries = favoriteValue.filter((fv:any) => fv.fav === true).map((fv:any) => fv.country );
+  const { countriesData } = useSelector((state:any)=>state.country);
+  const countries = countriesData.filter((country:any) => country.isFav);
   return (
     <>
-      {countries.length > 0 ? <Countries2 countriesData={countries}/> : <p>no favorite data</p>}
+      {countries.length > 0 ? <Countries countriesData={countries}/> : <p>No favorite data</p>}
     </>
   )
 }

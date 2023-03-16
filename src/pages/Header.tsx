@@ -13,11 +13,11 @@ import ToggleOnIcon from '@mui/icons-material/ToggleOn';
 import ToggleOffIcon from '@mui/icons-material/ToggleOff';
 import Badge from '@mui/material/Badge';
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 
 const Header = () => {
   const [darkMode,setDarkMode] = React.useState(false);
-  const { favoriteValue } = useSelector((state:any)=>state.favorite);
+  const { countriesData } = useSelector((state:any)=>state.country);
   
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -37,33 +37,37 @@ const Header = () => {
             COUNTRY
           </Typography>
 
-          <MenuItem>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-            <Link to="/" className='header__Icon'><HomeIcon /></Link>
-            </IconButton>
-          </MenuItem>
+          <Link to="/" className='header__Icon'>
+            <MenuItem>
+              <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+                <HomeIcon />
+              </IconButton>
+            </MenuItem>
+          </Link>
           
-          <MenuItem>
-            <IconButton
-              size="large"
-              aria-label="change me"
-              color="inherit">
-                <Link to="/countries" className='header__Icon'> <PublicIcon /></Link>
-            </IconButton>
-          </MenuItem>
-
-          <MenuItem>
-            <IconButton
-              size="large"
-              aria-label="change me"
-              color="inherit">
-              <Badge badgeContent={ favoriteValue.filter((f:any) => f.fav === true).length } color="error">
-                <Link to="/favorite" className='header__Icon'><FavoriteIcon /></Link>
-                
-              </Badge>
-              
-            </IconButton>
-          </MenuItem>
+          <Link to="/countries" className='header__Icon'> 
+            <MenuItem>
+              <IconButton
+                size="large"
+                aria-label="change me"
+                color="inherit">
+                  <PublicIcon />
+              </IconButton>
+            </MenuItem>
+          </Link>
+          
+          <Link to="/favorite" className='header__Icon'>
+            <MenuItem>
+              <IconButton
+                size="large"
+                aria-label="change me"
+                color="inherit">
+                <Badge badgeContent={ countriesData.filter((country:any) => country.isFav).length } color="error">
+                  <FavoriteIcon />
+                </Badge>
+              </IconButton>
+            </MenuItem>
+          </Link>
 
           <MenuItem onClick={()=> darkMode ? setDarkMode(false) : setDarkMode(true)}>
             <IconButton
