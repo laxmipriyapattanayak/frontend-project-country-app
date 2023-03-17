@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 
-import Countries from './pages/_Countries';
+import Countries from './pages/CountriesPage';
 import Footer from './pages/Footer';
 import NoPage from './pages/NoPage';
 import Header from './pages/Header';

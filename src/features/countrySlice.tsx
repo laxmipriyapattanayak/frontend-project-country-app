@@ -16,13 +16,22 @@ interface Country {
     isFav: boolean;
 }
 
-export const fetchCountries: any = createAsyncThunk( "countries/fetchCountries", async() => {
+export const fetchCountries: any = createAsyncThunk( "countries/fetchCountries", async () => {
     const res = await axios.get(`https://restcountries.com/v3.1/all`);
+    return res.data.map((country: any, index: number) => {
+    
+        const mCountry = {...country, id: index, isFav: false}
+        return mCountry;
+    });
+})
+
+export const fetchCountriesByName: any = createAsyncThunk( "countries/fetchCountriesByName", async (name: string) => {
+    const res = await axios.get(`https://restcountries.com/v3.1/name/${name}`);
     return res.data.map((country: any, index: number) => {
         const mCountry = {...country, id: index, isFav: false}
         return mCountry;
     });
-}) 
+})
 
 const initialState = {
     countriesData: [],
@@ -40,6 +49,11 @@ export const countrySlice = createSlice({
                 }
                 return country;
             })
+
+            localStorage.setItem('favorite', JSON.stringify(state.countriesData.map((country:any)=>{
+                return {id: country.id , isFav: country.isFav}
+            })));
+
         },
         sorting : (state: any, action: any) => {
             state.originalData = action.payload;
@@ -59,6 +73,18 @@ export const countrySlice = createSlice({
             state.countriesData = []
         });
         builder.addCase(fetchCountries.rejected,(state: any, action: any)=>{
+            state.loading = false
+            state.countriesData = []
+        });
+        builder.addCase(fetchCountriesByName.fulfilled,(state: any, action: {payload: Country})=>{
+            state.loading = false
+            state.countriesData = action.payload
+        });
+        builder.addCase(fetchCountriesByName.pending,(state: any, action: any)=>{
+            state.loading = true
+            state.countriesData = []
+        });
+        builder.addCase(fetchCountriesByName.rejected,(state: any, action: any)=>{
             state.loading = false
             state.countriesData = []
         });
