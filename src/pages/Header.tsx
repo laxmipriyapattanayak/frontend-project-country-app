@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -9,20 +9,18 @@ import MenuItem from '@mui/material/MenuItem';
 import PublicIcon from '@mui/icons-material/Public';
 import HomeIcon from '@mui/icons-material/Home'
 import FavoriteIcon from '@mui/icons-material/Favorite'
-import ToggleOnIcon from '@mui/icons-material/ToggleOn';
-import ToggleOffIcon from '@mui/icons-material/ToggleOff';
+import Switch from '@mui/material/Switch';
 import Badge from '@mui/material/Badge';
+
 import { useSelector } from 'react-redux'
 import { Link} from 'react-router-dom';
 
 
-
-const Header = () => {
-  const [darkMode,setDarkMode] = React.useState(false);
+const Header = (props:any) => {
+  const {check,change}=props;
   const { countriesData } = useSelector((state:any)=>state.country);
-  
   return (
-    <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -32,9 +30,8 @@ const Header = () => {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <MenuIcon />
+          <MenuIcon />
           </IconButton>
-
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             COUNTRY
           </Typography>
@@ -69,20 +66,21 @@ const Header = () => {
                 </Badge>
               </IconButton>
             </MenuItem>
-          </Link>
-          
-          <MenuItem onClick={()=> darkMode ? setDarkMode(false) : setDarkMode(true)}>
-            <IconButton
-              size="large"
-              aria-label="change me"
-              color="inherit">
-              {darkMode ? <ToggleOnIcon/> : <ToggleOffIcon />}
-            </IconButton>
-          </MenuItem>
-
+          </Link> 
+            <MenuItem>
+            <IconButton>
+               <Switch
+                color="warning"
+                checked={check}
+                onChange={change}
+                inputProps={{ 'aria-label': 'controlled' }}
+              />
+              </IconButton>
+            </MenuItem>
         </Toolbar>
       </AppBar>
     </Box>
+
   )
 }
 
