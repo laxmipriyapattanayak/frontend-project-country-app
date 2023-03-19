@@ -18,7 +18,7 @@ import { Link} from 'react-router-dom';
 
 const Header = (props:any) => {
   const {check,change}=props;
-  const { countriesData } = useSelector((state:any)=>state.country);
+  const { favoriteCountry } = useSelector((state:any)=>state.country);
   return (
       <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -61,7 +61,7 @@ const Header = (props:any) => {
                 size="large"
                 aria-label="change me"
                 color="inherit">
-                <Badge badgeContent={ countriesData.filter((country:any) => country.isFav).length } color="error">
+                <Badge badgeContent={ favoriteCountry?.length } color="error">
                   <FavoriteIcon />
                 </Badge>
               </IconButton>

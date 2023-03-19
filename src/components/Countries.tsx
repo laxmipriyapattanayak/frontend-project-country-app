@@ -19,6 +19,7 @@ const Countries = (props: any) => {
 
     interface Country {
         id: number;
+        cca3: string;
         flags: { png: string; alt: string};
         name: {common: string};
         region: string;
@@ -60,7 +61,7 @@ const Countries = (props: any) => {
                     {countriesData && countriesData.map((country: Country)=> {
                         return (
                             <TableRow
-                                key={country.id}
+                                key={country.cca3}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 >
                                 <TableCell align="center">
@@ -79,7 +80,7 @@ const Countries = (props: any) => {
                                         size="large"
                                         aria-label="change me"
                                         color={ country.isFav ? "error" : "info" }
-                                        onClick={() => handleFav(country.id)}>
+                                        onClick={() => handleFav(country.cca3)}>
                                             <FavoriteIcon />
                                     </IconButton>
                                 </TableCell>

@@ -3,11 +3,12 @@ import axios from "axios";
 interface CountryState {
     countriesData: [],
     originalData: [],
+    favoriteCountry: [],
     loading: boolean
 }
 
 interface Country {
-    id: number;
+    cca3: string;
     flags: { png: string; alt: string};
     name: {common: string};
     region: string;
@@ -19,19 +20,29 @@ interface Country {
 export const fetchCountries: any = createAsyncThunk( "countries/fetchCountries", async () => {
     const res = await axios.get(`https://restcountries.com/v3.1/all`);
     return res.data.map((country: any, index: number) => {
-    
-        const mCountry = {...country, id: index, isFav: false}
-        return mCountry;
+        return {...country, isFav: false}
     });
 })
 
-export const fetchCountriesByName: any = createAsyncThunk( "countries/fetchCountriesByName", async (name: string) => {
+export const countrySearch: any = createAsyncThunk( "countries/countrySearch", async (name: string) => {
     const res = await axios.get(`https://restcountries.com/v3.1/name/${name}`);
     return res.data.map((country: any, index: number) => {
-        const mCountry = {...country, id: index, isFav: false}
-        return mCountry;
+        return {...country, isFav: false}
+        //return mCountry;
     });
 })
+
+export const countrySearchByName: any = createAsyncThunk( "countries/countrySearchByName", async (name: string) => {
+    const res = await axios.get(`https://restcountries.com/v3.1/name/${name}?fullText=true`);
+    return res.data
+})
+
+const mapFavoriteCountry = (newlyFetchCountry: Country[], favoriteCountry: Country[]) => {
+    return newlyFetchCountry.map((country: Country) => {
+        country["isFav"] = favoriteCountry?.find((c: Country) => c.cca3 === country.cca3) ? true : false
+        return country;
+    })
+}
 
 const initialState = {
     countriesData: [],
@@ -44,16 +55,15 @@ export const countrySlice = createSlice({
     reducers:{
         markFavorite : (state: any, action: any) => {
             state.countriesData = state.countriesData.map((country:Country) => {
-                if(country.id === action.payload) {
+                if(country.cca3 === action.payload) {
                     country.isFav ? country['isFav'] = false : country['isFav'] = true ;
                 }
                 return country;
             })
 
-            localStorage.setItem('favorite', JSON.stringify(state.countriesData.map((country:any)=>{
-                return {id: country.id , isFav: country.isFav}
-            })));
-
+            // maintain favorite country in a seperate state
+            //TODO Fix for search
+            state.favoriteCountry = state.countriesData.filter((country: any) => country.isFav).map((country: any)=> country)
         },
         sorting : (state: any, action: any) => {
             state.originalData = action.payload;
@@ -64,9 +74,9 @@ export const countrySlice = createSlice({
         }
     },
     extraReducers:(builder)=>{
-        builder.addCase(fetchCountries.fulfilled,(state: any, action: {payload: Country})=>{
+        builder.addCase(fetchCountries.fulfilled,(state: any, action: {payload: Country[]})=>{
             state.loading = false
-            state.countriesData = action.payload
+            state.countriesData = mapFavoriteCountry(action.payload, state.favoriteCountry);
         });
         builder.addCase(fetchCountries.pending,(state: any, action: any)=>{
             state.loading = true
@@ -76,15 +86,27 @@ export const countrySlice = createSlice({
             state.loading = false
             state.countriesData = []
         });
-        builder.addCase(fetchCountriesByName.fulfilled,(state: any, action: {payload: Country})=>{
+        builder.addCase(countrySearch.fulfilled,(state: any, action: {payload: Country[]})=>{
             state.loading = false
-            state.countriesData = action.payload
+            state.countriesData = mapFavoriteCountry(action.payload, state.favoriteCountry);
         });
-        builder.addCase(fetchCountriesByName.pending,(state: any, action: any)=>{
+        builder.addCase(countrySearch.pending,(state: any, action: any)=>{
             state.loading = true
             state.countriesData = []
         });
-        builder.addCase(fetchCountriesByName.rejected,(state: any, action: any)=>{
+        builder.addCase(countrySearch.rejected,(state: any, action: any)=>{
+            state.loading = false
+            state.countriesData = []
+        });
+        builder.addCase(countrySearchByName.fulfilled,(state: any, action: {payload: Country[]})=>{
+            state.loading = false
+            state.countriesData = action.payload;
+        });
+        builder.addCase(countrySearchByName.pending,(state: any, action: any)=>{
+            state.loading = true
+            state.countriesData = []
+        });
+        builder.addCase(countrySearchByName.rejected,(state: any, action: any)=>{
             state.loading = false
             state.countriesData = []
         });
