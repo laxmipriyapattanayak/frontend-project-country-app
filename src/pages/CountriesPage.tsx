@@ -14,7 +14,7 @@ const CountriesPage = () => {
       dispatch(fetchCountries()); 
   },[dispatch]);
 
-  const handleSearch = (e: any) => {
+  const handleSearch = () => {
     if(searchString) {
       dispatch(countrySearch(searchString))
     } else {
@@ -29,7 +29,7 @@ const CountriesPage = () => {
   return (
     <div>
       
-      <TextField id="standard-basic" label="Search" value={searchString} variant="standard" onChange={(e) => setSearchSting(e.target.value)} onKeyUp={handleSearch} onBlur={refresh}/>
+      <TextField id="standard-basic" label="Search" value={searchString} variant="standard" onChange={(e) => setSearchSting(e.target.value)} onKeyUp={handleSearch} />
       {loading ? <p><CircularProgress />Loading... Please Wait</p> : <Countries countriesData={countriesData}/> }
     </div>
   )

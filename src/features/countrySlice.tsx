@@ -39,7 +39,7 @@ export const countrySearchByName: any = createAsyncThunk( "countries/countrySear
 
 const mapFavoriteCountry = (newlyFetchCountry: Country[], favoriteCountry: Country[]) => {
     return newlyFetchCountry.map((country: Country) => {
-        country["isFav"] = favoriteCountry?.find((c: Country) => c.cca3 === country.cca3) ? true : false
+        country["isFav"] = favoriteCountry?.find((countryData: Country) => countryData.cca3 === country.cca3) ? true : false
         return country;
     })
 }
@@ -47,6 +47,8 @@ const mapFavoriteCountry = (newlyFetchCountry: Country[], favoriteCountry: Count
 const initialState = {
     countriesData: [],
     loading: true,
+    originalData: [],
+    favoriteCountry: [],
 } as CountryState
 
 export const countrySlice = createSlice({

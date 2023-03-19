@@ -44,7 +44,7 @@ const Countries = (props: any) => {
     }
 
     return (
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} className="table">
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
