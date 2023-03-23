@@ -14,6 +14,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.table{
+  margin-left: auto;
+  margin-right: auto;
+}
 
 img {
   border: 1px solid #ddd;
@@ -25,10 +29,46 @@ img {
   color:white;
 }
 footer { 
-  color: gray;
+  color: rgb(18, 80, 118);
   font-size: smaller;
   margin-top: 20%;
 }
 span.label {
   color: blue;
+}
+.image{
+  height:auto;
+  width:70%;
+  margin :2rem;
+}
+.home-body{
+  display: grid;
+  grid-row: 1/2;
+  grid-template-columns: repeat(2,1fr);
+  grid-gap: 1rem;
+  flex-wrap: wrap;
+  
+}
+.home-body p{
+  padding:2rem;
+}
+.home-body h1{
+  padding-left:2rem;
+  color:blue;
+}
+@media (max-width: 600px) {
+  .home-body{
+    margin:2rem;
+    display: grid;
+    grid-row: 1;
+    grid-template-columns: repeat(1,1fr);
+    grid-gap: 1rem;
+    flex-wrap: wrap; 
+  }
+  .image{
+    margin:auto;
+  }
+
+  
+  
 }

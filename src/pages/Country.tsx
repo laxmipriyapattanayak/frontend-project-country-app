@@ -53,7 +53,7 @@ const Country = () => {
   const { countriesData, loading } = useSelector((state:any)=>state.country);
   const country = countriesData[0];
   return (
-    <div style={{ display:'flex', justifyContent:'center' }}>
+    <div style={{ display:'flex', justifyContent:'center',marginTop:'2rem' }}>
       {loading ? <CircularProgress/> : (
         <Card sx={{ maxWidth: 345,alignItems:'center'}}>
           <CardHeader
@@ -77,7 +77,7 @@ const Country = () => {
             alt={country?.flags['alt']}
           />
           <CardContent>
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body2" >
               This country belong to <span className='label'>{country?.region}</span> region and <span className='label'>{country?.subregion}</span> sub-region.
               Located at the <span className='label'>{country?.latlng[0]}°N</span> and <span className='label'>{country?.latlng[0]}°W</span>, this country has population of <span className='label'>{country?.population}</span> and it has gained the independent, acording to CIA World Factbook.
             </Typography>
@@ -89,23 +89,23 @@ const Country = () => {
               </IconButton>
             </Link>
             <IconButton aria-label="share">
-              <LocationOnIcon />
+              <Link to={country.maps.googleMaps}>
+              <LocationOnIcon/>
+              </Link>
             </IconButton>
             <ExpandMore
               expand={expanded}
               onClick={handleExpandClick}
               aria-expanded={expanded}
               aria-label="show more"
-            >
-              <ExpandMoreIcon />
-            </ExpandMore>
+          >
+            <ExpandMoreIcon />
+          </ExpandMore>
           </CardActions>
           <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent>
-              <Typography paragraph>all data in JSON:</Typography>
-              <pre>{JSON.stringify(country, null, 2) }</pre>
-            </CardContent>
-          </Collapse>
+        </CardContent>
+        </Collapse>
         </Card>
       )}
     </div>

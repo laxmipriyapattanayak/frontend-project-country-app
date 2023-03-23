@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -13,25 +13,17 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp'
 import { sorting, reset, markFavorite } from '../features/countrySlice';
 import { Link} from 'react-router-dom';
+import {  toast } from 'react-toastify';
+import { Country } from '../types/Types'
 
 const Countries = (props: any) => {
     const {countriesData} = props;
-
-    interface Country {
-        id: number;
-        cca3: string;
-        flags: { png: string; alt: string};
-        name: {common: string};
-        region: string;
-        population: number;
-        languages?: { [key: string]: string };
-        isFav: boolean;
-    }
     const dispatch = useDispatch();
     const [isSort,setIsSort] = useState(false)
 
-    const handleFav = (index: any) => {
+    const handleFav = (index: any,isFav:boolean) => {
         dispatch(markFavorite(index))
+        isFav ? toast("county removed from favorite list") : toast("county added to favorite list");     
     }
 
     const handleSort = () => {
@@ -45,7 +37,7 @@ const Countries = (props: any) => {
 
     return (
         <TableContainer component={Paper} className="table">
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <Table sx={{ width: '100%' }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
                         <TableCell align="center">Flag</TableCell>
@@ -80,7 +72,7 @@ const Countries = (props: any) => {
                                         size="large"
                                         aria-label="change me"
                                         color={ country.isFav ? "error" : "info" }
-                                        onClick={() => handleFav(country.cca3)}>
+                                        onClick={() => handleFav(country.cca3,country.isFav)}>
                                             <FavoriteIcon />
                                     </IconButton>
                                 </TableCell>

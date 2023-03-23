@@ -1,11 +1,10 @@
-import React, {useEffect} from 'react'
-
-import { useDispatch, useSelector } from 'react-redux'
 
 const Home = () => {
   return (
-    <div>
-      <h1>Country APP</h1>
+    <div className="home-body">
+      <img src={"https://media.giphy.com/media/wa8uMtV7bmdGTGGmD7/giphy.gif"} alt="world map" className="image"/>
+      <section>
+      <h1>Countries in the World:</h1>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
           Soluta cupiditate blanditiis, aut qui labore exercitationem.
           Sequi alias quis distinctio, magnam excepturi autem accusamus. 
@@ -15,7 +14,11 @@ const Home = () => {
           porro nemo ex dolorum. Enim omnis modi sapiente hic cum, odit odio 
           neque tempora nostrum fuga aut? Aliquid laboriosam quis voluptatibus sed error, 
           doloremque quo odio, blanditiis qui velit numquam aut cumque tempora veritatis? Qui.</p>
+      </section>
+      
+             
     </div>
+   
   )
 }
 

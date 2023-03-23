@@ -21,18 +21,11 @@ const CountriesPage = () => {
       dispatch(fetchCountries());
     }
   }
-  const refresh = () => {
-    setSearchSting('');
-    dispatch(fetchCountries());
-  }
-
   return (
     <div>
-      
       <TextField id="standard-basic" label="Search" value={searchString} variant="standard" onChange={(e) => setSearchSting(e.target.value)} onKeyUp={handleSearch} />
       {loading ? <p><CircularProgress />Loading... Please Wait</p> : <Countries countriesData={countriesData}/> }
     </div>
   )
 }
-
 export default CountriesPage;
