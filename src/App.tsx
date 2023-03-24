@@ -27,10 +27,10 @@ function App() {
 
   return (
     <BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
       <Header check={darkMode} change={()=>setDarkMode(!darkMode)}/>
       <ToastContainer autoClose={1000}/>
-      <ThemeProvider theme={theme}>
-      <CssBaseline />
         <main>
           <Routes>
             <Route path='/' element={<Home />}/>
